@@ -18,7 +18,6 @@ public class JAXBContextFactory {
 		private final JAXBContext jc;
 
 		Context(){
-			System.out.println("Init jaxb context");
 			JAXBContext newContext=null;
 			try {
 
