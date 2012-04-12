@@ -24,12 +24,20 @@ public class MarshallerTest {
 	@Test
 	public void testCaseNSPrefix() throws JAXBException{
 		XSAMSData document = loadXSAMS();
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		Output.writeStream(document, os);
-		
-		String doc = os.toString();
+		String doc = getXsamsString(document);
 
 		assertTrue(doc.contains("<lpcs:QNs>"));
+	}
+
+	
+	
+	@Test
+	public void testOutputFormatted() throws JAXBException{
+		XSAMSData document = loadXSAMS();
+		String doc = getXsamsString(document);
+		
+		assertTrue(doc.contains("\n"));
+		
 	}
 
 	private XSAMSData loadXSAMS() throws JAXBException{
@@ -39,6 +47,14 @@ public class MarshallerTest {
 		xsams = Input.readStream(stream);
 		assertNotNull(xsams);
 		return xsams;
+	}
+	
+	private String getXsamsString(XSAMSData document) throws JAXBException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		Output.writeStream(document, os);
+		
+		String doc = os.toString();
+		return doc;
 	}
 
 }

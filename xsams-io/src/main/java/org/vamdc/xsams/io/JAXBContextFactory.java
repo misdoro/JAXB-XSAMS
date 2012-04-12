@@ -50,7 +50,7 @@ public class JAXBContextFactory {
 		try {
 			m= getContext().createMarshaller();
 			m.setProperty("com.sun.xml.bind.namespacePrefixMapper", new NSPrefixMapper());
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, IOSettings.prettyprint.getIntValue()>0);
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(IOSettings.prettyprint.getIntValue()>0));
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			return null;
