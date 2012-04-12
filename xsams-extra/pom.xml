@@ -10,7 +10,6 @@
 	</parent>
 
 	<artifactId>xsams-extra</artifactId>
-	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>xsams-extra</name>
 	<description>extensions for XSAMS Jaxb bindings</description>

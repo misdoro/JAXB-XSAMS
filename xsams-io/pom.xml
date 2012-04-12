@@ -10,7 +10,6 @@
 	</parent>
 	
 	<artifactId>xsams-io</artifactId>
-	<version>11.12-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>XSAMS IO classes for JAXB</name>
 
