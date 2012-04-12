@@ -1,0 +1,12 @@
+collisions org.vamdc.xsams.process.collisions
+environments org.vamdc.xsams.environments
+functions org.vamdc.xsams.functions
+methods org.vamdc.xsams.methods
+nonradiative org.vamdc.xsams.process.nonradiative
+radiative org.vamdc.xsams.process.radiative
+sources org.vamdc.xsams.sources
+statesAtoms org.vamdc.xsams.species.atoms
+statesMolecules org.vamdc.xsams.species.molecules
+statesParticles org.vamdc.xsams.species.particles
+statesSolids org.vamdc.xsams.species.solids
+typesAttributes org.vamdc.xsams.common
