@@ -71,4 +71,8 @@ public class Input {
 		return responseStream;
 	}
 	
+	public static InputStream getXSAMSAsInputStream(XSAMSData document){
+		return new XSAMSInputStream(document).getStream();
+	}
+	
 }
