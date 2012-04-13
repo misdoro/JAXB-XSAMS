@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import org.junit.Before;
 import org.junit.Test;
 import org.vamdc.xsams.schema.MolecularStateType;
+import org.vamdc.xsams.schema.MoleculeType;
 import org.vamdc.xsams.schema.RadiativeTransitionType;
 import org.vamdc.xsams.schema.XSAMSData;
 
@@ -57,7 +58,12 @@ public class UnmarshallerTest {
 		Object state = transition.getUpperStateRef();
 		assertNotNull(state);
 		assertTrue(state instanceof MolecularStateType);
-		MolecularStateType mstate = state; 
+		MolecularStateType mstate = (MolecularStateType) state;
+		assertNotNull(mstate.getParent());
+		assertTrue(mstate.getParent() instanceof MoleculeType);
+		MoleculeType molecule = (MoleculeType) mstate.getParent();
+		assertNotNull(molecule.getMolecularChemicalSpecies().getChemicalName());
+		System.out.println(molecule.getMolecularChemicalSpecies().getChemicalName().getValue());
 	}
 
 }
