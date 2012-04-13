@@ -9,7 +9,7 @@ import javax.xml.bind.JAXBElement;
 import org.vamdc.xsams.schema.ObjectFactory;
 import org.vamdc.xsams.schema.SourceType;
 
-public abstract class PrimaryTypeBase {
+public abstract class PrimaryTypeBase extends BaseClass{
 	public abstract List<JAXBElement<Object>> getSourceReves();
 
 	 /**

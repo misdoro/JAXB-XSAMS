@@ -10,6 +10,8 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.vamdc.xsams.schema.MolecularStateType;
+import org.vamdc.xsams.schema.RadiativeTransitionType;
 import org.vamdc.xsams.schema.XSAMSData;
 
 public class UnmarshallerTest {
@@ -43,5 +45,19 @@ public class UnmarshallerTest {
 		assertNotNull(xsams);
 	}
 
+	@Test
+	public void testParentReference() throws JAXBException{
+		xsams = Input.readStream(ClassLoader.getSystemResourceAsStream(XSAMSResourceFile));
+		assertNotNull(xsams);
+		assertNull(xsams.getParent());
+		assertNotNull(xsams.getSpecies().getParent());
+		assertTrue(xsams==xsams.getSpecies().getParent());
+		RadiativeTransitionType transition = xsams.getProcesses().getRadiative().getRadiativeTransitions().get(0);
+		assertNotNull(transition);
+		Object state = transition.getUpperStateRef();
+		assertNotNull(state);
+		assertTrue(state instanceof MolecularStateType);
+		MolecularStateType mstate = state; 
+	}
 
 }
