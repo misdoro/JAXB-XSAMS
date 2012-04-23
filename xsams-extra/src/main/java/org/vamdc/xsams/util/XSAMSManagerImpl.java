@@ -248,7 +248,7 @@ public class XSAMSManagerImpl extends org.vamdc.xsams.schema.XSAMSData implement
 					speciesroot.setParticles(new Particles());
 				}
 				speciesroot.getParticles().getParticles().add((ParticleType)species);
-				
+				this.realspecies.put(speciesID, ((ParticleType)species).getSpeciesID());
 				
 			}else if (species instanceof SolidType){
 				//Or solid, for which we have still a dirty hack, replacing speciesid with stateid 
@@ -256,6 +256,7 @@ public class XSAMSManagerImpl extends org.vamdc.xsams.schema.XSAMSData implement
 					speciesroot.setSolids(new Solids());
 				}
 				speciesroot.getSolids().getSolids().add((SolidType)species);
+				this.realspecies.put(speciesID, ((SolidType)species).getSpeciesID());
 			}
 		}
 		return speciesID;
