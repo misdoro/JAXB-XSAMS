@@ -13,6 +13,14 @@
 		<xjc:javaType name="java.lang.Integer" 
 		adapter="org.vamdc.xsams.adapters.IntegerAdapter"
 		xmlType="xs:integer" />
+		
+		<xjc:javaType name="java.lang.Integer" 
+		adapter="org.vamdc.xsams.adapters.IntegerAdapter"
+		xmlType="xs:gYear" />
+		
+		<xjc:javaType name="java.util.Date" 
+		adapter="org.vamdc.xsams.adapters.DateAdapter"
+		xmlType="xs:date" />
 
 		<xjc:javaType name="java.lang.Double" 
 		xmlType="xs:decimal" 
