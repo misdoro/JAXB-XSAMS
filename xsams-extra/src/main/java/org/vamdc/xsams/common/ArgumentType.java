@@ -9,5 +9,12 @@ public class ArgumentType extends org.vamdc.xsams.schema.ArgumentType {
 		super();
 	}
 
+	public ArgumentType(String name, String units, String description){
+		super();
+		this.setName(name);
+		this.setDescription(description);
+		this.setUnits(units);
+	}
+	
 }
 

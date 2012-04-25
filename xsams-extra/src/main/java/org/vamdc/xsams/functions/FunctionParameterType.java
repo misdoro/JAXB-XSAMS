@@ -8,6 +8,13 @@ public class FunctionParameterType extends org.vamdc.xsams.schema.FunctionParame
 	public FunctionParameterType(){
 		super();
 	}
+	
+	public FunctionParameterType(String name, String units, String description){
+		super();
+		this.setName(name);
+		this.setUnits(units);
+		this.setDescription(description);
+	}
 
 }
 
