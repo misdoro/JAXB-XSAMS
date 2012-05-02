@@ -27,24 +27,20 @@ public enum XSAMSSettings {
 	
 	XSAMSSettings(Integer value){
 		this.defIntval = value;
-		this.intval = 0;
+		this.intval = value;
 	}
 	
 	public void useDefault(){
-		this.strval=null;
-		this.intval=null;
+		this.strval=this.strval;
+		this.intval=this.defIntval;
 	}
 	
 	public String getStrValue(){
-		if (this.strval!=null)
-			return this.strval;
-		return this.defStrval;
+		return this.strval;
 	}
 	
 	public Integer getIntValue(){
-		if (this.intval!=null)
-			return this.intval;
-		return this.defIntval;
+		return this.intval;
 	}
 	
 	public void setStrValue(String value){
