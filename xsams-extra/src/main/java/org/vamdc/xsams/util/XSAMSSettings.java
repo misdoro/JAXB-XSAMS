@@ -31,7 +31,7 @@ public enum XSAMSSettings {
 	}
 	
 	public void useDefault(){
-		this.strval=this.strval;
+		this.strval=this.defStrval;
 		this.intval=this.defIntval;
 	}
 	
