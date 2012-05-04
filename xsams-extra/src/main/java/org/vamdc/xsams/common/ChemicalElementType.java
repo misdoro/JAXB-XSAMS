@@ -141,7 +141,9 @@ public class ChemicalElementType extends org.vamdc.xsams.schema.ChemicalElementT
 
 		public ChemicalElementType(String symbol){
 			super();
-
+			String ucs = symbol.toUpperCase();
+			this.setElementSymbol(ElementSymbolType.valueOf(ucs));
+			this.setNuclearCharge(NuclearCharge.valueOf(ucs).getCharge());
 		}
 
 }
