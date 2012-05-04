@@ -112,7 +112,7 @@ public class ChemicalElementType extends org.vamdc.xsams.schema.ChemicalElementT
 
 		{
 			for (NuclearCharge value: NuclearCharge.values()){
-				symbols.put(value.getCharge(), ElementSymbolType.valueOf(value.name()));
+				this.put(value.getCharge(), ElementSymbolType.valueOf(value.name()));
 			}
 		}};
 
