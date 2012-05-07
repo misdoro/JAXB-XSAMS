@@ -25,6 +25,8 @@ public class Input {
 	}
 	
 	public static XSAMSData readStream(InputStream source) throws JAXBException{
+		if (source==null)
+			throw new IllegalArgumentException("Input stream should not be null");
 		Unmarshaller u = JAXBContextFactory.getUnmarshaller();
 		return (XSAMSData) u.unmarshal(source);
 	}
@@ -39,10 +41,7 @@ public class Input {
 	 */
 	public static XSAMSData readURL(URL document,Monitor monitor) throws JAXBException, IOException{
 		
-		HttpURLConnection conn = (HttpURLConnection) document.openConnection();
-		conn.setConnectTimeout(IOSettings.httpConnectTimeout.getIntValue());
-		conn.setReadTimeout(IOSettings.httpDataTimeout.getIntValue());
-		InputStream stream = conn.getInputStream();
+		InputStream stream = openConnection(document);
 		if (monitor!=null)
 			stream = new MonitorInputStream(stream,monitor);
 		return readStream(stream);
@@ -63,12 +62,23 @@ public class Input {
 		conn.setConnectTimeout(IOSettings.httpConnectTimeout.getIntValue());
 		conn.setReadTimeout(IOSettings.httpDataTimeout.getIntValue());
 
+		checkHttpResultCode(adress, conn);
+		
 		InputStream responseStream = conn.getInputStream();
 		String contentEncoding = conn.getContentEncoding();
 		if ("gzip".equalsIgnoreCase(contentEncoding)) {
 			responseStream = new GZIPInputStream(responseStream);
 		}
 		return responseStream;
+	}
+
+	private static void checkHttpResultCode(URL adress, URLConnection conn)
+			throws IOException {
+		if (adress.getProtocol().equals("http")|| adress.getProtocol().equals("https")){
+			HttpURLConnection httpc= (HttpURLConnection) conn;
+			if (httpc.getResponseCode()!=200)
+				throw new IOException("Server responded with code "+httpc.getResponseCode());
+		}
 	}
 	
 	public static InputStream getXSAMSAsInputStream(XSAMSData document){
