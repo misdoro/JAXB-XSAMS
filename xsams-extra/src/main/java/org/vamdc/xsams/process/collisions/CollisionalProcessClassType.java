@@ -8,6 +8,13 @@ public class CollisionalProcessClassType extends org.vamdc.xsams.schema.Collisio
 	public CollisionalProcessClassType(){
 		super();
 	}
+	
+	public CollisionalProcessClassType(String... codes){
+		super();
+		for (String code:codes){
+			this.getCodes().add(code);
+		}
+	}
 
 }
 

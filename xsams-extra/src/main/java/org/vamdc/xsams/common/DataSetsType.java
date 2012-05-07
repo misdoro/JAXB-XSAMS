@@ -16,5 +16,10 @@ public class DataSetsType extends org.vamdc.xsams.schema.DataSetsType {
 		this.getDataSets().addAll(datasets);
 	}
 	
+	public DataSetsType(DataSetType dataset){
+		super();
+		this.getDataSets().add(dataset);
+	}
+	
 }
 
