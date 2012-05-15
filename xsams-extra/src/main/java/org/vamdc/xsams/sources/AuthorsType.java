@@ -44,7 +44,8 @@ public class AuthorsType extends org.vamdc.xsams.schema.AuthorsType {
 		 * Adds new author by it's name, returns this author object, so one can set any other field value 
 		 * @param authorName value that will go into name element
 		 */
-		public void addAuthor(String authorName){
+		public AuthorsType addAuthor(String authorName){
 			this.getAuthors().add(new AuthorType(authorName));
+			return this;
 		}
 }

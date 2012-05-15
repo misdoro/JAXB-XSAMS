@@ -12,25 +12,29 @@ import org.vamdc.xsams.schema.SourceType;
 public abstract class PrimaryTypeBase extends BaseClass{
 	public abstract List<JAXBElement<Object>> getSourceReves();
 
-	 /**
-     * Adds source reference to this element
-     * @param {@link SourceType} source. Don't forget to add it to the XSAMSData separately! 
-     */
-    public void addSource(SourceType source){
-		ObjectFactory of = new ObjectFactory();
-		this.getSourceReves().add(of.createPrimaryTypeSourceRef(source));
-	}
-	
-    /**
-     * Adds multiple source references to this element
-     * @param sources Collection<{@link SourceType}>  Don't forget to add all sources to the XSAMSData separately! 
-     */
-	public void addSources(Collection<SourceType> sources){
-		for (SourceType source:sources){
-			this.addSource(source);
+	/**
+	 * Adds source reference to this element
+	 * @param {@link SourceType} source. Don't forget to add it to the XSAMSData separately! 
+	 */
+	public void addSource(SourceType source){
+		if (source!=null){
+			ObjectFactory of = new ObjectFactory();
+			this.getSourceReves().add(of.createPrimaryTypeSourceRef(source));
 		}
 	}
-	
+
+	/**
+	 * Adds multiple source references to this element
+	 * @param sources Collection<{@link SourceType}>  Don't forget to add all sources to the XSAMSData separately! 
+	 */
+	public void addSources(Collection<SourceType> sources){
+		if (sources!=null){
+			for (SourceType source:sources){
+				this.addSource(source);
+			}
+		}
+	}
+
 	/**
 	 * Get all sources of this element. This list is a copy, modifying it won't change the object! 
 	 * @return Collection<SourceType>
@@ -44,5 +48,5 @@ public abstract class PrimaryTypeBase extends BaseClass{
 			}
 		return sources;
 	}
-	
+
 }
