@@ -57,7 +57,8 @@ public class Input {
 	public static InputStream openConnection(URL adress) throws IOException{
 		URLConnection conn = adress.openConnection();
 		//Allow gzip encoding
-		conn.setRequestProperty("Accept-Encoding", "gzip");
+		if (IOSettings.compress.getIntValue()==1)
+			conn.setRequestProperty("Accept-Encoding", "gzip");
 		//Set timeouts
 		conn.setConnectTimeout(IOSettings.httpConnectTimeout.getIntValue());
 		conn.setReadTimeout(IOSettings.httpDataTimeout.getIntValue());

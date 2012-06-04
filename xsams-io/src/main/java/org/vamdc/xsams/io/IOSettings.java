@@ -7,6 +7,7 @@ package org.vamdc.xsams.io;
  */
 public enum IOSettings {
 	prettyprint(1),//Pretty-print output documents or not
+	compress(1),//Try GZIP compression of transfer
 	httpDataTimeout(60000),//Data timeout for HTTP
 	httpConnectTimeout(2000),//Connect timeout for HTTP
 	;
