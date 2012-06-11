@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.Stack;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.stream.StreamResult;
@@ -27,7 +29,7 @@ public class PrettyPrint implements Runnable{
 	private StreamResult xmlOutput;
 	private PipedInputStream in;
 	private PipedOutputStream out;
-	
+
 	public PrettyPrint(){
 		try {
 			TransformerFactory transFactory = TransformerFactory.newInstance();
@@ -43,6 +45,10 @@ public class PrettyPrint implements Runnable{
 
 	}
 
+	public static InputStream transformStatic(InputStream source){
+		return new PrettyPrint().transform(source);
+	}
+	
 	public InputStream transform(InputStream source){
 		if (src == null ){
 			//Setup streams
@@ -64,41 +70,49 @@ public class PrettyPrint implements Runnable{
 
 	@Override
 	public void run() {
-		try {
-			transformer.transform(src, xmlOutput);
-			out.close();
-			src = null;
-		} catch (Exception e) {
 			try {
+				transformer.transform(src, xmlOutput);
 				out.close();
-			} catch (IOException e1) {
+			} catch (TransformerException e) {
+				try {
+					out.close();
+				} catch (IOException e1) {}
+				src = null;
+				if (e.getCause()!=null)
+					e.getCause().printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			src=null;
-		}
-
+			src = null;
 	}
 	
 	/**
 	 * Class to remove extra space between tags, 
 	 * needed to make prettyprinter work correctly
 	 * 
-	 * outputs data from input stream, if not in tag then skip all empty space if there is only empty space between tags.
+	 * outputs data from input stream,
+	 * if not in tag then skip all empty space if there is only empty space between tags.
+	 * 
+	 * Throw IOException if encounter < or > in a value
 	 * @author doronin
 	 *
 	 */
 	private class NoSpaceStream extends InputStream{
 		private byte[] buffer;
-		private int index;
+		private int readIndex;
 
 		private InputStream backStream;
 
 		private int quote='\0';//Quote used
-		private boolean backslash=false;//Is this symbol backslashed?
+		private boolean wasEscaped=false;//Is this symbol backslashed?
 		private boolean intag=false;
+		private Stack<String> tagStack=new Stack<String>();
+		private Stack<String> fullTagStack=new Stack<String>();
+		private StringBuilder tag = new StringBuilder();
 
 		public NoSpaceStream(InputStream back){
 			buffer=new byte[0];
-			index=0;
+			readIndex=0;
 			backStream = back;
 
 		}
@@ -107,28 +121,32 @@ public class PrettyPrint implements Runnable{
 		public int read() throws IOException {
 
 			//If we have buffer filled, return data from it:
-			if (index<buffer.length)
-				return buffer[index++];
+			if (readIndex<buffer.length)
+				return buffer[readIndex++];
 
 			//else if in tag, look for end of tag, read bytes normally
 			if (intag){
 				//Read a byte
 				int newbyte = backStream.read();
 				//Check if we encounter quotes:
-				if (newbyte == '\'' || newbyte == '"' && !backslash){
+				if (newbyte == '\'' || newbyte == '"' && !wasEscaped){
 					if (quote == newbyte)
 						quote='\0';//We are out of quotes now
-					else if (quote=='\0')
+					else if (notInQuote())
 						quote = newbyte;//Entered quotes
 				}
 
-				//Check if symbol is backslashed, just return if yes
-				if (backslash){
-					backslash=false;
-				}else if (newbyte=='\\') backslash=true;
-
-				if (newbyte == '>' && quote=='\0')
+				//Check if escaping next symbol
+				wasEscaped=isEscape(newbyte);
+				
+				
+				if (newbyte == '>' && notInQuote()){
+					processTagName();
 					intag=false;//Getting out of tag
+				}else{
+					tag.append((char)newbyte);
+				}
+				
 				return newbyte;
 			}else{
 				int newbyte='\0';
@@ -140,27 +158,65 @@ public class PrettyPrint implements Runnable{
 				}
 				//if (newbyte!=-1)
 				bytestream.write(newbyte);
+				
 				byte[] bytes = bytestream.toByteArray();
 				boolean hasdata=false;
 				for (int i=0;i<bytes.length-1;i++){
 					byte thisbyte = bytes[i];
-					if (thisbyte!='\n' && thisbyte!='\r' && thisbyte!='\t' && thisbyte!=' '){
+					if (!isASpace(thisbyte)){		
 						hasdata=true;
 						break;
 					}
 				}
 
 				intag=true;//Set intag to true since we must have encountered new tag
-
+				
 				if (hasdata){//Print first byte of buffer if we got some data
 					buffer=bytes;
-					index=1;
+					readIndex=1;
 					return buffer[0];
 				}else{
-					//Otherwise start a new tag, go on
 					return newbyte;
+					
 				}	
 			}
+		}
+
+		private void processTagName() throws IOException {
+			String fullTagName=tag.toString();
+			if (fullTagName.startsWith("/")){
+				processEndTag(fullTagName.substring(1));
+			}else{
+				fullTagStack.push(fullTagName);
+				tagStack.push(fullTagName.split("[ \\t\\n\\x0B\\f\\r>]")[0]);
+			}
+			
+			tag=new StringBuilder();
+			
+		}
+
+		private void processEndTag(String tag) throws IOException {
+			String startTag=tagStack.pop();
+			if (startTag.equals(tag))
+				fullTagStack.pop();
+			else{
+				buffer=("</"+tag+">").getBytes();
+				readIndex=0;
+				throw new IllegalArgumentException("Not matching tags "+startTag+" and "+tag+" at "+fullTagStack);
+			}
+		}
+
+		private boolean notInQuote() {
+			return quote=='\0';
+		}
+
+		private boolean isEscape(int newbyte) {
+			if (newbyte=='\\') return true;
+			return false;
+		}
+
+		private boolean isASpace(byte thisbyte) {
+			return thisbyte=='\n' || thisbyte=='\r' || thisbyte=='\t' || thisbyte==' ';
 		}
 
 	}
