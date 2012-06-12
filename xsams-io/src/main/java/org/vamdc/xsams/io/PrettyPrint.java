@@ -184,14 +184,17 @@ public class PrettyPrint implements Runnable{
 
 		private void processTagName() throws IOException {
 			String fullTagName=tag.toString();
+			tag=new StringBuilder();
+			
+			if (fullTagName.startsWith("!--")){	
+				return;
+			}
 			if (fullTagName.startsWith("/")){
 				processEndTag(fullTagName.substring(1));
-			}else{
+			}else if (!fullTagName.endsWith("/")){
 				fullTagStack.push(fullTagName);
 				tagStack.push(fullTagName.split("[ \\t\\n\\x0B\\f\\r>]")[0]);
 			}
-			
-			tag=new StringBuilder();
 			
 		}
 
