@@ -3,7 +3,7 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-	schemaLocation="../schema/xsams.xsd"
+	schemaLocation="../../../../target/checkout/xsams.xsd"
 	version="2.0"
 	jaxb:extensionBindingPrefixes="xjc"
 	xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
@@ -31,96 +31,96 @@
 		<xjc:simple/>
 	</jaxb:globalBindings>
 
-	<jaxb:bindings schemaLocation="../schema/cases/dcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/dcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.dcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
 
-	<jaxb:bindings schemaLocation="../schema/cases/gen.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/gen.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.gen" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
 
-	<jaxb:bindings schemaLocation="../schema/cases/hunda.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/hunda.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.hunda" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/hundb.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/hundb.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.hundb" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/lpcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/lpcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.lpcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/lpos.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/lpos.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.lpos" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/ltcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/ltcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.ltcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/ltos.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/ltos.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.ltos" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/asymcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/asymcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.asymcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/asymos.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/asymos.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.asymos" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/sphcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/sphcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.sphcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/sphos.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/sphos.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.sphos" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/nltcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/nltcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.nltcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/nltos.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/nltos.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.nltos" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/stcs.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/stcs.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.stcs" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
-	<jaxb:bindings schemaLocation="../schema/cases/commonTypes.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/cases/commonTypes.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.cases.common" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
 
-	<jaxb:bindings schemaLocation="../schema/typesAttributes.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/typesAttributes.xsd">
 		<jaxb:bindings node="//xs:complexType[@name='PrimaryType']">
 			<inheritance:extends>org.vamdc.xsams.PrimaryTypeBase</inheritance:extends>
         </jaxb:bindings>
   	</jaxb:bindings>
 
-	<jaxb:bindings schemaLocation="../schema/xsams.xsd">
+	<jaxb:bindings schemaLocation="../../../../target/checkout/xsams.xsd">
 		<jaxb:schemaBindings>
 			<jaxb:package name="org.vamdc.xsams.schema" />
 		</jaxb:schemaBindings>

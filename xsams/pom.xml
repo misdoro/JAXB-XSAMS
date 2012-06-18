@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.vamdc.xml</groupId>
@@ -86,6 +87,24 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>checkout</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-${project.version}/</connectionUrl>
+					
+				</configuration>
+
+			</plugin>
+			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
 				<executions>
@@ -96,17 +115,14 @@
 					</execution>
 				</executions>
 				<configuration>
-					<schemaDirectory>src/main/resources/schema</schemaDirectory>
-					<!--<includeSchema>**/*.xsd</includeSchema> -->
+					<schemaDirectory>target/checkout</schemaDirectory>
 					<bindingDirectory>src/main/resources/binding</bindingDirectory>
 					<extension>true</extension>
 					<args>
 						<arg>-XtoString</arg>
 						<arg>-Xinheritance</arg>
 						<arg>-Xequals</arg>
-						<!--<arg>-XhashCode</arg> -->
 						<arg>-Xcopyable</arg>
-						<!--<arg>-Xvalue-constructor</arg> -->
 					</args>
 					<plugins>
 						<plugin>
