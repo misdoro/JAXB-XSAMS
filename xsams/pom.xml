@@ -4,7 +4,7 @@
 
 	<groupId>org.vamdc.xml</groupId>
 	<artifactId>xsams</artifactId>
-	<version>0.3</version>
+	<version>vamdc-working</version>
 	<packaging>jar</packaging>
 
 	<name>xsams</name>
@@ -99,8 +99,8 @@
 					</execution>
 				</executions>
 				<configuration>
-					<connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-${project.version}/</connectionUrl>
-					
+					<!--  <connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-${project.version}/</connectionUrl>-->
+					<connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/branches/vamdc-working/</connectionUrl>
 				</configuration>
 
 			</plugin>
