@@ -99,8 +99,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!--  <connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-${project.version}/</connectionUrl>-->
-					<connectionUrl>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/branches/vamdc-working/</connectionUrl>
+					<connectionUrl>${xsams.scm.url}</connectionUrl>
 				</configuration>
 
 			</plugin>
