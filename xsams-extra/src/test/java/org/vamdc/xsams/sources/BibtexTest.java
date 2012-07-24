@@ -7,9 +7,10 @@ import org.junit.Test;
 public class BibtexTest {
 
 	@Test
-	public void readKidaSource(){
+	public void readKidaSource(){		
 		SourceType bibtex = new BibtexSource("/kida.bib");
 		assertTrue(bibtex.getTitle().length()>0);
+		
 	}
 	
 }
