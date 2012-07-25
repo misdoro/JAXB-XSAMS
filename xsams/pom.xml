@@ -10,15 +10,8 @@
 	</parent>
 
 	<artifactId>xsams</artifactId>
-	<version>vamdc-working</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
-	
-	<parent>
-		<groupId>org.vamdc.xml</groupId>
-		<artifactId>xsams-parent</artifactId>
-		<version>12.07-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
 
 	<name>xsams</name>
 	<description>pure XSAMS Jaxb bindings</description>

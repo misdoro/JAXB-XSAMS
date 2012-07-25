@@ -42,7 +42,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xsams.scm.url>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/branches/vamdc-working/</xsams.scm.url>
+		<xsams.scm.url>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-1.0-rc1/</xsams.scm.url>
 	</properties>
 	
 	<dependencies>
