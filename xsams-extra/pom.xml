@@ -14,13 +14,6 @@
 	<name>xsams-extra</name>
 	<description>extensions for XSAMS Jaxb bindings</description>
 
-	<scm>
-		<connection>scm:svn:http://svn.ntl.nnov.ru/misdoro/VAMDC-XSAMS-extra/trunk</connection>
-		<developerConnection>scm:svn:http://svn.ntl.nnov.ru/misdoro/VAMDC-XSAMS-extra/trunk</developerConnection>
-		<url>http://svn.ntl.nnov.ru/misdoro/VAMDC-XSAMS-extra/trunk</url>
-	</scm>
-
-
 	<dependencies>
 		<dependency>
 			<groupId>commons-collections</groupId>
