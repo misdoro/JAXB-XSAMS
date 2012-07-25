@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>xsams</artifactId>
-	<version>1.0</version>
+	<version>${xsams.project.version}</version>
 	<packaging>jar</packaging>
 
 	<name>xsams</name>
