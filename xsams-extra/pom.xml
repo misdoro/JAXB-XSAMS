@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.vamdc.xml</groupId>
 			<artifactId>xsams</artifactId>
-			<version>0.3</version>
+			<version>vamdc-working</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

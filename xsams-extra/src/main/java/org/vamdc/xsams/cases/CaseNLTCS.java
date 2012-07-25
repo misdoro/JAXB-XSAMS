@@ -69,8 +69,16 @@ extends org.vamdc.xsams.cases.nltcs.Case{
 			qNs.getRS().add(new RankingType(qn));
 		}
 
+		//I
+		if (state.checkQNum(QNType.I))
+			qNs.setI(new CoupledNuclearSpinAMType(
+					state.getQNumByType(QNType.I)));
+
 		//parity
 		qNs.setParity(state.getQNumStrValueByType(QNType.Parity));
+
+		//kronigParity
+		qNs.setKronigParity(state.getQNumStrValueByType(QNType.kParity));
 
 		//asSym
 		qNs.setAsSym(state.getQNumStrValueByType(QNType.AsSym));

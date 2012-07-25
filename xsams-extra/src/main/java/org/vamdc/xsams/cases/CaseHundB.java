@@ -32,6 +32,10 @@ public class CaseHundB extends org.vamdc.xsams.cases.hundb.Case{
 		qNs.setN(state.getQNumIntValueByType(QNType.N));
 		//SpinCompLabel
 		qNs.setSpinComponentLabel(state.getQNumIntValueByType(QNType.spinLbl));
+		//I
+		if (state.checkQNum(QNType.I))
+			qNs.setI(new CoupledNuclearSpinAMType(
+					state.getQNumByType(QNType.I)));
 		//F1
 		if (state.checkQNum(QNType.Fi))
 			qNs.setF1(new NuclearSpinAMType(		

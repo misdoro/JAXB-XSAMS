@@ -26,7 +26,7 @@ extends org.vamdc.xsams.cases.stcs.Case{
 
 		}
 
-		//li
+		//l
 		for (QuantumNumber qn: state.getQNumsByType(QNType.L)){
 			qNs.getLS().add(qn.getIntValue());
 		}
@@ -67,9 +67,9 @@ extends org.vamdc.xsams.cases.stcs.Case{
 					state.getQNumByType(QNType.roVibSym)));
 		
 		//I
-		if (state.checkQNum(QNType.I))
-			qNs.setI(new NuclearSpinAMType(
-					state.getQNumByType(QNType.I)));
+		for (QuantumNumber qn: state.getQNumsByType(QNType.I)){
+			qNs.getIS().add(new CoupledNuclearSpinAMType(qn));
+		}
 
 		//intermediate angular momentum F
 		//F

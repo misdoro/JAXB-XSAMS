@@ -78,10 +78,10 @@ public class TabulatedDataType extends org.vamdc.xsams.schema.TabulatedDataType 
 		}
 		//Set all dimension descriptions
 		for (Integer i = 0;i<dimension;i++){
-			this.getXS().get(i).setDataDescription(desc[i]);
+			this.getXS().get(i).setDescription(desc[i]);
 		}
 		//Set value description
-		this.getY().setDataDescription(desc[dimension]);
+		this.getY().setDescription(desc[dimension]);
 		
 		return 0;
 	}

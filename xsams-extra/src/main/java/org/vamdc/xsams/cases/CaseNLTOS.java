@@ -23,10 +23,14 @@ extends org.vamdc.xsams.cases.nltos.Case{
 		if (state.checkQNum(QNType.elecSym))
 			qNs.setElecSym(new  SymmetrySpeciesType(
 					state.getQNumByType(QNType.elecSym)));
-		qNs.setElecInv(state.getQNumStrValueByType(QNType.elecInv));
 
 		//S
 		qNs.setS(state.getQNumValueByType(QNType.S));
+		//I
+		if (state.checkQNum(QNType.I))
+			qNs.setI(new CoupledNuclearSpinAMType(
+					state.getQNumByType(QNType.I)));
+
 		//N
 		qNs.setN(state.getQNumIntValueByType(QNType.N));
 
@@ -81,7 +85,8 @@ extends org.vamdc.xsams.cases.nltos.Case{
 
 		//parity
 		qNs.setParity(state.getQNumStrValueByType(QNType.Parity));
-
+		//kronigParity
+		qNs.setKronigParity(state.getQNumStrValueByType(QNType.kParity));
 		//asSym
 		qNs.setAsSym(state.getQNumStrValueByType(QNType.AsSym));
 

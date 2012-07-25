@@ -22,6 +22,8 @@ extends org.vamdc.xsams.cases.lpos.Case{
 		//Electronic symmetries
 		qNs.setElecInv(state.getQNumStrValueByType(QNType.elecInv));
 		qNs.setElecRefl(state.getQNumStrValueByType(QNType.elecRefl));
+		
+		qNs.setLambda(state.getQNumIntValueByType(QNType.Lambda));
 		//S
 		qNs.setS(state.getQNumValueByType(QNType.S));
 		//N
@@ -47,11 +49,11 @@ extends org.vamdc.xsams.cases.lpos.Case{
 		qNs.setVibRefl(state.getQNumStrValueByType(QNType.vibRefl));
 
 		//J
-		qNs.setJ(state.getQNumIntValueByType(QNType.J));
+		qNs.setJ(state.getQNumValueByType(QNType.J));
 
 		//I
 		if (state.checkQNum(QNType.I))
-			qNs.setI(new NuclearSpinAMType(
+			qNs.setI(new CoupledNuclearSpinAMType(
 					state.getQNumByType(QNType.I)));
 
 		//intermediate angular momentum Fi

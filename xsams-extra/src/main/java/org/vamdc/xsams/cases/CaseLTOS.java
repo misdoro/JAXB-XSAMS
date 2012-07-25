@@ -22,6 +22,8 @@ extends org.vamdc.xsams.cases.ltos.Case{
 		//Electronic symmetries
 		qNs.setElecInv(state.getQNumStrValueByType(QNType.elecInv));
 		qNs.setElecRefl(state.getQNumStrValueByType(QNType.elecRefl));
+		qNs.setLambda(state.getQNumIntValueByType(QNType.Lambda));
+		
 		//S
 		qNs.setS(state.getQNumValueByType(QNType.S));
 		//N
@@ -48,8 +50,14 @@ extends org.vamdc.xsams.cases.ltos.Case{
 		//l2 vibrational angular momentum
 		qNs.setL2(state.getQNumIntValueByType(QNType.li));
 		//J
-		qNs.setJ(state.getQNumIntValueByType(QNType.J));
+		qNs.setJ(state.getQNumValueByType(QNType.J));
 
+		//I
+				if (state.checkQNum(QNType.I))
+					qNs.setI(new CoupledNuclearSpinAMType(
+							state.getQNumByType(QNType.I)));
+
+		
 		//intermediate angular momentum Fi
 		for (QuantumNumber qn: state.getQNumsByType(QNType.Fi)){
 			switch (qn.getModeIndex()){

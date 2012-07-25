@@ -40,13 +40,16 @@ extends org.vamdc.xsams.cases.lpcs.Case{
 		//vibRefl
 		qNs.setVibRefl(state.getQNumStrValueByType(QNType.vibRefl));
 
+		//vibSym
+		qNs.setVibSym(new SymmetrySpeciesType(state.getQNumByType(QNType.vibSym)));
+		
 		//J
 		qNs.setJ(state.getQNumIntValueByType(QNType.J));
 
 		//I
-		if (state.checkQNum(QNType.I))
-			qNs.setI(new NuclearSpinAMType(
-					state.getQNumByType(QNType.I)));
+		for (QuantumNumber qn: state.getQNumsByType(QNType.I)){
+			qNs.getIS().add(new CoupledNuclearSpinAMType(qn));
+		}
 
 		//intermediate angular momentum Fi
 		for (QuantumNumber qn: state.getQNumsByType(QNType.Fi)){

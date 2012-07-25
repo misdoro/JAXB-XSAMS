@@ -4,8 +4,8 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 class NSPrefixMapper extends NamespacePrefixMapper{
 
-	private final static String XSAMSNS = "http://vamdc.org/xml/xsams/0.3";
-	private final static String XSAMSCaseNS = "http://vamdc.org/xml/xsams/0.3/cases/";
+	private final static String XSAMSNS = "http://vamdc.org/xml/xsams/1.0";
+	private final static String XSAMSCaseNS = "http://vamdc.org/xml/xsams/1.0/cases/";
 
 	@Override
 	public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {

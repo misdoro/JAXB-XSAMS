@@ -67,7 +67,7 @@ extends org.vamdc.xsams.cases.asymos.Case{
 		
 		//I
 		if (state.checkQNum(QNType.I))
-			qNs.setI(new NuclearSpinAMType(
+			qNs.setI(new CoupledNuclearSpinAMType(
 					state.getQNumByType(QNType.I)));
 
 		//intermediate angular momentum Fi

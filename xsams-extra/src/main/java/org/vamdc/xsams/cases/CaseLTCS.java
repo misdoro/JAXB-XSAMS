@@ -56,6 +56,11 @@ extends org.vamdc.xsams.cases.ltcs.Case{
 			}
 		}
 
+		//I
+		if (state.checkQNum(QNType.I))
+			qNs.setI(new CoupledNuclearSpinAMType(
+					state.getQNumByType(QNType.I)));
+		
 		//intermediate angular momentum F
 		//F
 		if (state.checkQNum(QNType.F))

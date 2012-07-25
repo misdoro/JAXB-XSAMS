@@ -10,10 +10,10 @@ public class CaseHundA extends org.vamdc.xsams.cases.hunda.Case{
 		super();
 		//Set ID
 		this.caseID="hunda";
-		
+
 		//Attach quantum numbers
 		this.qNs = new QNs();
-		
+
 		//Fill in quantum numbers
 		//Electronic state label
 		qNs.setElecStateLabel(state.getElecState());
@@ -32,6 +32,12 @@ public class CaseHundA extends org.vamdc.xsams.cases.hunda.Case{
 		qNs.setV(state.getQNumIntValueByType(QNType.V));
 		//J
 		qNs.setJ(state.getQNumValueByType(QNType.J));
+
+		//I
+		if (state.checkQNum(QNType.I))
+			qNs.setI(new CoupledNuclearSpinAMType(
+					state.getQNumByType(QNType.I)));
+
 		//F1
 		if (state.checkQNum(QNType.Fi))
 			qNs.setF1(new NuclearSpinAMType(		
@@ -51,7 +57,7 @@ public class CaseHundA extends org.vamdc.xsams.cases.hunda.Case{
 		qNs.setKronigParity(state.getQNumStrValueByType(QNType.kParity));
 		//asSym
 		qNs.setAsSym(state.getQNumStrValueByType(QNType.AsSym));
-		
+
 	}
-	
+
 }
