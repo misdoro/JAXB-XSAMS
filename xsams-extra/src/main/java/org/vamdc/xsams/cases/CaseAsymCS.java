@@ -34,6 +34,11 @@ extends org.vamdc.xsams.cases.asymcs.Case{
 			qNs.setVibSym(new  SymmetrySpeciesType(
 					state.getQNumByType(QNType.vibSym)));
 
+		//roVibSym
+		if (state.checkQNum(QNType.roVibSym))
+			qNs.setRovibSym(new SymmetrySpeciesType(
+					state.getQNumByType(QNType.roVibSym)));
+		
 		//J
 		qNs.setJ(state.getQNumIntValueByType(QNType.J));
 		

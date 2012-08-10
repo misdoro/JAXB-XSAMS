@@ -37,19 +37,6 @@
 		</dependency>
 	</dependencies>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>vamdcrepo</id>
-			<name>VAMDC snapshots</name>
-			<url>ftp://doronin.org/</url>
-		</snapshotRepository>
-		<repository>
-			<id>vamdcrepo</id>
-			<name>VAMDC releases</name>
-			<url>ftp://doronin.org/</url>
-		</repository>
-	</distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
