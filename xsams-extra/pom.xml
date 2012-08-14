@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.vamdc.xml</groupId>
 		<artifactId>xsams-parent</artifactId>
-		<version>12.07-SNAPSHOT</version>
+		<version>12.07</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -26,6 +26,13 @@
 			<groupId>org.vamdc.xml</groupId>
 			<artifactId>xsams</artifactId>
 			<version>${xsams.project.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jbibtex</groupId>
+			<artifactId>java-bibtex</artifactId>
+			<version>1.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

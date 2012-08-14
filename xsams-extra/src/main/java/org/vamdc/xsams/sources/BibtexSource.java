@@ -27,6 +27,9 @@ public class BibtexSource extends SourceType{
 			}
 			
 			this.setAuthors(authorsType);
+			this.setVolume(getKeyValue(entry, "volume"));
+			this.setSourceName(getKeyValue(entry, "journal"));
+			
 		}
 			
 	}
