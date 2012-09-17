@@ -62,6 +62,7 @@ public class Input {
 		//Set timeouts
 		conn.setConnectTimeout(IOSettings.httpConnectTimeout.getIntValue());
 		conn.setReadTimeout(IOSettings.httpDataTimeout.getIntValue());
+		conn.setRequestProperty("User-Agent",IOSettings.userAgent.getStrVal());
 
 		checkHttpResultCode(adress, conn);
 		
