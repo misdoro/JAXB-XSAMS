@@ -34,7 +34,7 @@ public class AuthorsType extends org.vamdc.xsams.schema.AuthorsType {
 		public AuthorsType(String concatAuthors, String separator){
 			super();
 			if (concatAuthors!=null && separator !=null){
-				for (String author:concatAuthors.split(" and ")){
+				for (String author:concatAuthors.split(separator)){
 					this.addAuthor(author.trim());
 				}
 			}
