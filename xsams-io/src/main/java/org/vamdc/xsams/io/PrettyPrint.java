@@ -94,10 +94,11 @@ public class PrettyPrint implements Runnable{
 	 * if not in tag then skip all empty space if there is only empty space between tags.
 	 * 
 	 * Throw IOException if encounter < or > in a value
+	 * or if encounter not matching start and end tags
 	 * @author doronin
 	 *
 	 */
-	private class NoSpaceStream extends InputStream{
+	protected class NoSpaceStream extends InputStream{
 		private byte[] buffer;
 		private int readIndex;
 
@@ -152,23 +153,22 @@ public class PrettyPrint implements Runnable{
 				int newbyte='\0';
 				//Buffer to keep data that occured between tags and consisted of not only empty space
 				ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
-				//Not in tag, read all data up to next tag start, decide if they make sense
+				//Not in tag, read all data up to next tag start, decide if it makes sense
 				while ((newbyte = backStream.read())!='<' && newbyte!=-1){
 					bytestream.write(newbyte);
 				}
-				//if (newbyte!=-1)
-				bytestream.write(newbyte);
 				
 				byte[] bytes = bytestream.toByteArray();
 				boolean hasdata=false;
-				for (int i=0;i<bytes.length-1;i++){
-					byte thisbyte = bytes[i];
-					if (!isASpace(thisbyte)){		
+				for (byte abyte:bytes){
+					if (!isASpace(abyte)){		
 						hasdata=true;
 						break;
 					}
 				}
-
+				
+				bytestream.write(newbyte);
+				bytes = bytestream.toByteArray();
 				intag=true;//Set intag to true since we must have encountered new tag
 				
 				if (hasdata){//Print first byte of buffer if we got some data
@@ -200,12 +200,12 @@ public class PrettyPrint implements Runnable{
 
 		private void processEndTag(String tag) throws IOException {
 			String startTag=tagStack.pop();
-			if (startTag.equals(tag))
+			if (startTag.equals(tag)){
 				fullTagStack.pop();
-			else{
+			}else{
 				buffer=("</"+tag+">").getBytes();
 				readIndex=0;
-				throw new IllegalArgumentException("Not matching tags "+startTag+" and "+tag+" at "+fullTagStack);
+				throw new IllegalArgumentException("Not matching tags "+startTag+" and /"+tag+" at "+fullTagStack);
 			}
 		}
 
@@ -214,8 +214,7 @@ public class PrettyPrint implements Runnable{
 		}
 
 		private boolean isEscape(int newbyte) {
-			if (newbyte=='\\') return true;
-			return false;
+			return newbyte=='\\';
 		}
 
 		private boolean isASpace(byte thisbyte) {
