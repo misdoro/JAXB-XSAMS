@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vamdc.xml</groupId>
 	<artifactId>xsams-parent</artifactId>
-	<version>12.07-r1</version>
+	<version>12.07r2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>Parent project for all XSAMS JAXB mappings classes and utilities</name>
@@ -59,14 +59,14 @@
 		<repository>
 			<id>nexus</id>
 			<name>VAMDC Releases</name>
-			<url>http://dev.vamdc.org/nexus/content/repositories/releases</url>
+			<url>http://nexus.vamdc.org/nexus/content/repositories/releases</url>
 		</repository>
 		
 		<!-- Publish snapshots here -->
 		<snapshotRepository>
 			<id>nexus</id>
 			<name>VAMDC Snapshot releases</name>
-			<url>http://dev.vamdc.org/nexus/content/repositories/snapshots</url>
+			<url>http://nexus.vamdc.org/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
