@@ -29,11 +29,12 @@ public class PrettyPrint implements Runnable{
 	private StreamResult xmlOutput;
 	private PipedInputStream in;
 	private PipedOutputStream out;
+	private Throwable exception;
 
 	public PrettyPrint(){
 		try {
 			TransformerFactory transFactory = TransformerFactory.newInstance();
-			transFactory.setAttribute("indent-number",new Integer(2));
+			//transFactory.setAttribute("indent-number",new Integer(2));
 			transformer = transFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2"); 
@@ -43,6 +44,10 @@ public class PrettyPrint implements Runnable{
 			e.printStackTrace();
 		}  
 
+	}
+	
+	public Throwable getTransformException(){
+		return exception;
 	}
 
 	public static InputStream transformStatic(InputStream source){
@@ -79,9 +84,10 @@ public class PrettyPrint implements Runnable{
 				} catch (IOException e1) {}
 				src = null;
 				if (e.getCause()!=null)
-					e.getCause().printStackTrace();
+					this.exception=e.getCause();
 			} catch (IOException e) {
 				e.printStackTrace();
+				this.exception=e;
 			}
 			src = null;
 	}
@@ -93,8 +99,7 @@ public class PrettyPrint implements Runnable{
 	 * outputs data from input stream,
 	 * if not in tag then skip all empty space if there is only empty space between tags.
 	 * 
-	 * Throw IOException if encounter < or > in a value
-	 * or if encounter not matching start and end tags
+	 * Throw IllegalArgumentException if encounter not matching start and end tags
 	 * @author doronin
 	 *
 	 */
@@ -103,7 +108,7 @@ public class PrettyPrint implements Runnable{
 		private int readIndex;
 
 		private InputStream backStream;
-
+		private boolean hasFailed=false;
 		private int quote='\0';//Quote used
 		private boolean wasEscaped=false;//Is this symbol backslashed?
 		private boolean intag=false;
@@ -125,6 +130,10 @@ public class PrettyPrint implements Runnable{
 			if (readIndex<buffer.length)
 				return buffer[readIndex++];
 
+			//If we failed, fall back to backStream
+			if (hasFailed)
+				return backStream.read();
+			
 			//else if in tag, look for end of tag, read bytes normally
 			if (intag){
 				//Read a byte
@@ -203,9 +212,17 @@ public class PrettyPrint implements Runnable{
 			if (startTag.equals(tag)){
 				fullTagStack.pop();
 			}else{
+				hasFailed=true;
 				buffer=("</"+tag+">").getBytes();
 				readIndex=0;
-				throw new IllegalArgumentException("Not matching tags "+startTag+" and /"+tag+" at "+fullTagStack);
+				if (fullTagStack.size()>2){
+					fullTagStack.remove(0);
+					fullTagStack.remove(0);
+				}
+				throw new IllegalArgumentException
+				("Pretty printer failure:\n" +
+					"Not matching tags: opening <"+startTag+"> and closing </"+tag+">.\n" +
+					"Problem at: "+fullTagStack);
 			}
 		}
 

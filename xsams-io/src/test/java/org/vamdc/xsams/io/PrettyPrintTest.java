@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.Ignore;
 
 public class PrettyPrintTest {
 
@@ -29,6 +30,24 @@ public class PrettyPrintTest {
 		}
 
 	}
+	
+	@Test
+	public void testNoSpaceStreamNomatchtag(){
+		String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?> 		<taga> <tagb> value <tagc> value2 </tagb> </taga>";
+		String expected="<?xml version=\"1.0\" encoding=\"UTF-8\"?><taga><tagb> value <tagc> value2 </tagb> </taga>";
+		try {
+			PrettyPrint pretty=new PrettyPrint();
+			InputStream nospace=pretty.new NoSpaceStream(getStream(xml));
+			String result = getString(nospace);
+			System.out.println(result);
+			assertTrue(equalsNoSpace(xml,result));
+			assertEquals(expected,result);
+		} catch (Exception e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
+
+	}
+	
 	
 	@Test
 	public void testPrettyStandard(){
@@ -55,16 +74,17 @@ public class PrettyPrintTest {
 	
 	@Test
 	public void testPrettyNoMatchTag(){
-		String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?><taga><tagb><tagc/></tagb></taga>";
+		String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?><taga><tagb>value<tagc>value2</tagb></taga>";
 		
+		PrettyPrint pretty=new PrettyPrint();
 		try {
-			InputStream prettyStream=new PrettyPrint().transform(getStream(xml));
+			InputStream prettyStream=pretty.transform(getStream(xml));
 			String result = getString(prettyStream);
 			System.out.println(result);
 			assertTrue(equalsNoSpace(xml,result));
 		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
+			assertTrue(e instanceof IllegalArgumentException);
+			//e.printStackTrace();
 		}
 	}
 	
