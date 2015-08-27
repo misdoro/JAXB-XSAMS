@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-import org.junit.Ignore;
 
 public class PrettyPrintTest {
 
@@ -40,6 +39,7 @@ public class PrettyPrintTest {
 			InputStream nospace=pretty.new NoSpaceStream(getStream(xml));
 			String result = getString(nospace);
 			System.out.println(result);
+			assertNotNull(pretty.getTransformException());
 			assertTrue(equalsNoSpace(xml,result));
 			assertEquals(expected,result);
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class PrettyPrintTest {
 			InputStream prettyStream=pretty.transform(getStream(xml));
 			String result = getString(prettyStream);
 			System.out.println(result);
-			assertTrue(equalsNoSpace(xml,result));
+			assertNotNull(pretty.getTransformException());
 		} catch (Exception e) {
 			assertTrue(e instanceof IllegalArgumentException);
 			//e.printStackTrace();
