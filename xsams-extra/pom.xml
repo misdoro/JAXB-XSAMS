@@ -31,10 +31,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jbibtex</groupId>
-			<artifactId>java-bibtex</artifactId>
-			<version>1.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<artifactId>jbibtex</artifactId>
+			<version>1.0.15</version>
 		</dependency>
 	</dependencies>
 
