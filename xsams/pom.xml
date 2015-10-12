@@ -19,23 +19,23 @@
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
-			<version>2.2.11</version>
+			<version>${jaxb.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-core</artifactId>
-			<version>2.2.11</version>
+			<version>${jaxb.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jvnet.jaxb2_commons</groupId>
 			<artifactId>jaxb2-basics-testing</artifactId>
-			<version>0.9.5</version>
+			<version>${jaxb2-basics.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jvnet.jaxb2_commons</groupId>
 			<artifactId>jaxb2-basics</artifactId>
-			<version>0.9.5</version>
+			<version>${jaxb2-basics.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -77,14 +77,14 @@
 					<args>
 						<arg>-XtoString</arg>
 						<arg>-Xinheritance</arg>
-						<arg>-Xequals</arg>
+						<arg>-XsimpleEquals</arg>
 						<arg>-Xcopyable</arg>
 					</args>
 					<plugins>
 						<plugin>
 							<groupId>org.jvnet.jaxb2_commons</groupId>
 							<artifactId>jaxb2-basics</artifactId>
-							<version>0.5.3</version>
+							<version>${jaxb2-basics.version}</version>
 						</plugin>
 					</plugins>
 

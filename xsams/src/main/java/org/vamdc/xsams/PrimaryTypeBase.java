@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.jvnet.jaxb2_commons.lang.CopyStrategy;
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 import org.vamdc.xsams.schema.ObjectFactory;
 import org.vamdc.xsams.schema.SourceType;
 
@@ -47,6 +49,18 @@ public abstract class PrimaryTypeBase extends BaseClass{
 					sources.add((SourceType) source.getValue());
 			}
 		return sources;
+	}
+
+	/**
+	 * Dummy method to handle inheritance properly after the update to jaxb-commons 0.6.4->0.6.5
+	 * @param locator
+	 * @param draftCopy
+	 * @param strategy
+	 * @return
+	 */
+	public Object copyTo(ObjectLocator locator, Object draftCopy,
+			CopyStrategy strategy) {
+		return draftCopy;
 	}
 
 }

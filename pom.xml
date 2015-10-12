@@ -43,6 +43,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xsams.scm.url>scm:svn:https://xsams.svn.sourceforge.net/svnroot/xsams/tags/vamdc/release-1.0-r1/</xsams.scm.url>
 		<xsams.project.version>1.0r2-SNAPSHOT</xsams.project.version>
+		<jaxb.version>2.2.11</jaxb.version>
+		<jaxb2-basics.version>0.9.5</jaxb2-basics.version>
 	</properties>
 	
 	<dependencies>
