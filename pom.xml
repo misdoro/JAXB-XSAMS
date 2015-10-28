@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.vamdc.xml</groupId>
 	<artifactId>xsams-parent</artifactId>
-	<version>12.07r2</version>
+	<version>12.07r3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<name>Parent project for all XSAMS JAXB mappings classes and utilities</name>
