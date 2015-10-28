@@ -112,6 +112,7 @@ public class PrettyPrint implements Runnable{
 		private int quote='\0';//Quote used
 		private boolean wasEscaped=false;//Is this symbol backslashed?
 		private boolean intag=false;
+		private boolean incomment=false;
 		private Stack<String> tagStack=new Stack<String>();
 		private Stack<String> fullTagStack=new Stack<String>();
 		private StringBuilder tag = new StringBuilder();
@@ -152,7 +153,7 @@ public class PrettyPrint implements Runnable{
 				
 				if (newbyte == '>' && notInQuote()){
 					processTagName();
-					intag=false;//Getting out of tag
+					intag=incomment;//Getting out of tag
 				}else{
 					tag.append((char)newbyte);
 				}
@@ -193,11 +194,14 @@ public class PrettyPrint implements Runnable{
 
 		private void processTagName() throws IOException {
 			String fullTagName=tag.toString();
-			tag=new StringBuilder();
-			
-			if (fullTagName.startsWith("!--")){	
+			if (fullTagName.startsWith("!--")){
+				incomment=!fullTagName.endsWith("--");
 				return;
 			}
+			
+			tag=new StringBuilder();
+			
+
 			if (fullTagName.startsWith("/")){
 				processEndTag(fullTagName.substring(1));
 			}else if (!fullTagName.endsWith("/")){

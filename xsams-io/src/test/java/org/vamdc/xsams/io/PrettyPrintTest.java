@@ -90,6 +90,25 @@ public class PrettyPrintTest {
 		}
 	}
 	
+	@Test
+	public void testPrettyComments(){
+		String xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?><taga><!-- <tagb>value<tagc>value2</tagc>\n</tagb>--><tagc>a</tagc></taga>";
+		String expected="<?xml version=\"1.0\" encoding=\"UTF-8\"?><taga>\n"+
+		"  <!-- <tagb>value<tagc>value2</tagc>\n</tagb>-->\n"+
+  		"  <tagc>a</tagc>\n"+
+  		"</taga>\n";
+		PrettyPrint pretty=new PrettyPrint();
+		try {
+			InputStream prettyStream=pretty.transform(getStream(xml));
+			String result = getString(prettyStream);
+			assertTrue(equalsNoSpace(xml,result));
+			assertEquals(result,expected);
+			System.out.println(result);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
 	private boolean equalsNoSpace(String string1,String string2){
 		String nsp1 = string1.replaceAll(PrettyPrintTest.spacePattern,"");
 		String nsp2 = string2.replaceAll(PrettyPrintTest.spacePattern,"");
